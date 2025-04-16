@@ -1,3 +1,9 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 .loader {
     position: fixed;
     top: 0;
@@ -21,6 +27,7 @@
     position: relative;
     width: 100px;
     height: 100px;
+    animation: spin 3s linear infinite;
 }
 
 .spinner span {
@@ -35,16 +42,16 @@
     text-align: center;
     color: #64ffda;
     transform-origin: 50px 50px;
-    animation: spin 3s linear infinite;
 }
 
+/* Rotation angles */
 .spinner span:nth-child(1) { transform: rotate(0deg) translate(0, -50px); }
-.spinner span:nth-child(2) { transform: rotate(51.4deg) translate(0, -50px); }
-.spinner span:nth-child(3) { transform: rotate(102.8deg) translate(0, -50px); }
-.spinner span:nth-child(4) { transform: rotate(154.2deg) translate(0, -50px); }
-.spinner span:nth-child(5) { transform: rotate(205.6deg) translate(0, -50px); }
-.spinner span:nth-child(6) { transform: rotate(257deg) translate(0, -50px); }
-.spinner span:nth-child(7) { transform: rotate(308.4deg) translate(0, -50px); }
+.spinner span:nth-child(2) { transform: rotate(45deg) translate(0, -50px); }
+.spinner span:nth-child(3) { transform: rotate(90deg) translate(0, -50px); }
+.spinner span:nth-child(4) { transform: rotate(135deg) translate(0, -50px); }
+.spinner span:nth-child(5) { transform: rotate(180deg) translate(0, -50px); }
+.spinner span:nth-child(6) { transform: rotate(225deg) translate(0, -50px); }
+.spinner span:nth-child(7) { transform: rotate(270deg) translate(0, -50px); }
 
 @keyframes spin {
     100% { transform: rotate(360deg); }
@@ -70,12 +77,12 @@ nav {
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 25px; /* Modern gap spacing */
+    gap: 25px;
 }
 
 .nav-links li {
     position: relative;
-    margin: 0; /* Remove individual margins */
+    margin: 0;
 }
 
 .nav-links a {
@@ -85,7 +92,7 @@ nav {
     transition: all 0.3s ease;
     padding: 8px 15px;
     border-radius: 100px;
-    white-space: nowrap; /* Prevent text wrapping */
+    white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -97,7 +104,7 @@ nav {
     position: absolute;
     bottom: -5px;
     height: 2px;
-    background: #ff0000;
+    background: #64ffda;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform, width;
 }
@@ -152,31 +159,153 @@ section.visible {
 #hero {
     background: linear-gradient(45deg, #0a192f, #020c1b);
     color: #ccd6f6;
-    text-align: center;
+    padding: 100px 15% 80px 10%;
 }
 
-.hero-content h1,
-.hero-content h2 {
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-image {
+    flex-shrink: 0;
+    width: 280px;
+    height: 280px;
+    margin-top: -30px;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid #64ffda;
+    box-shadow: 0 0 25px rgba(100, 255, 218, 0.2);
+    object-fit: cover;
+}
+
+ul {
+    width: 500px;
+    padding-left: 20px;
+}
+
+li {
+    text-align: justify;
+    margin-bottom: 8px;
+}
+
+.p1 {
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.hero-text {
+    text-align: left;
+    flex: 1;
+}
+
+/* Fixed font sizes */
+.hero-content h1 {
     font-family: 'Space Mono', monospace;
+    font-size: clamp(2rem, 6vw, 3rem);
     background: linear-gradient(90deg, #ff8c00, #ff2e63, #64ffda);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin: 10px 0;
-    text-align: center;
-}
-
-.hero-content h1 {
-    font-size: 4em;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    color: #64ffda; /* Fallback */
 }
 
 .hero-content h2 {
-    font-size: 2.5em;
-    margin-bottom: 30px;
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    background: linear-gradient(90deg, #0a1, #ff2e63, rgb(107, 0, 139));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 10px 0;
+    color: #64ffda;
 }
 
-/* Typing Animation for Hero */
+/* Responsive Design */
+@media (max-width: 992px) {
+    #hero {
+        padding: 80px 5%;
+        overflow-x: hidden;
+    }
+    
+    .hero-image {
+        width: 220px;
+        height: 220px;
+        margin-top: -20px;
+        max-width: 100%;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    #hero {
+        padding: 80px 5% 40px;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        padding: 0;
+    }
+    
+    .hero-image {
+        width: min(200px, 50vw);
+        height: min(200px, 50vw);
+        margin: 0 auto 20px;
+    }
+    
+    .hero-text,
+    .hero-content h1,
+    .hero-content h2 {
+        text-align: center;
+        width: 100%;
+        padding: 0 5%;
+    }
+
+    .typing-text {
+        white-space: normal;
+        border-right: none;
+        animation: none;
+    }
+
+    /* Mobile menu fix */
+    .nav-links {
+        width: 60%;
+        height: 100vh;
+        padding: 80px 30px;
+    }
+
+    ul {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    #hero {
+        padding: 60px 5% 30px;
+    }
+    
+    .hero-image {
+        width: min(150px, 45vw);
+        height: min(150px, 45vw);
+    }
+
+    .hero-text {
+        padding: 0 !important;
+    }
+}
+
+/* Typing Animation */
 .typing-text {
     border-right: 2px solid #64ffda;
     animation: typing 5s steps(50) infinite, blink 0.5s step-end infinite;
@@ -196,11 +325,14 @@ section.visible {
     background: #112240;
     padding: 25px;
     border-radius: 5px;
-    transition: transform 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    overflow: hidden;
 }
 
 .project-card:hover {
-    transform: translateY(-10px);
+    transform: scale(1.07);
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5);
+    background: #173b5f;
 }
 
 .project-card h3 {
@@ -209,29 +341,49 @@ section.visible {
 }
 
 /* Contact Section */
+#contact {
+    min-height: auto !important; 
+    padding: 30px 20% !important; 
+    justify-content: flex-start;
+}
+
 .contact-links {
     display: flex;
     justify-content: center;
-    gap: 50px;
-    margin-top: 20px;
+    gap: 20px;
+    margin: 0;  
+    padding: 5px 0;  
 }
 
 .contact-links a {
-    color: #64ffda;
-    font-size: 2em;
-    transition: transform 0.3s;
+    font-size: 1.3em;
+    padding: 8px;  
+    display: flex;
+    transition: all 0.3s ease;
 }
 
 .contact-links a:hover {
-    transform: translateY(-5px);
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* Optional: Add media query for mobile */
+@media (max-width: 768px) {
+    #contact {
+        padding: 20px 10% !important;
+    }
+    .contact-links {
+        gap: 15px;
+    }
+    .contact-links a {
+        font-size: 1.1em;
+    }
 }
 
 /* About Section */
-/* This section centers the heading content and applies a mixed-color gradient.
-   The h2 is animated to move continuously. */
 #about {
     padding: 50px 20%;
-    background: linear-gradient(135deg, #1e1e1e, #292929);
+    background: #112240;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -249,12 +401,10 @@ section.visible {
 }
 
 @keyframes moveTextAbout {
-    0% { transform: translateX(0); }
-    50% { transform: translateX(30vw); }
-    100% { transform: translateX(0); }
+    0% { transform: translateX(-20%); }
+    100% { transform: translateX(20%); }
 }
 
-/* Apply continuous horizontal movement only to the h2 in the About section */
 #about .about-content h2 {
     animation: moveTextAbout 6s linear infinite;
 }
@@ -269,7 +419,7 @@ section.visible {
     50% { border-color: transparent }
 }
 
-/* Responsive Design */
+/* Responsive Navigation Fixes */
 @media (max-width: 768px) {
     nav {
         padding: 20px;
@@ -284,7 +434,7 @@ section.visible {
         top: 0;
         right: -100%;
         height: 100vh;
-        width: 70%;
+        width: 60%;
         background: rgba(10, 25, 47, 0.98);
         backdrop-filter: blur(15px);
         flex-direction: column;
@@ -314,13 +464,5 @@ section.visible {
 
     section {
         padding: 100px 10%;
-    }
-
-    .hero-content h1 {
-        font-size: 2.5em;
-    }
-
-    .hero-content h2 {
-        font-size: 1.5em;
     }
 }
