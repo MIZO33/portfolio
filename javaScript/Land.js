@@ -54,7 +54,7 @@ const observer = new IntersectionObserver((entries) => {
             updateIndicator(id);
         }
     });
-}, { threshold: 0.5 });
+}, { threshold: 0.1 });
 
 document.querySelectorAll('section').forEach(section => {
     observer.observe(section);
